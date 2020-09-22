@@ -29,10 +29,10 @@ public class WordSorterWithLambdaAndFilter {
 
 
         if (sortingOrder.equals(ASCENDING)) {
-            list.stream().filter(s -> maxLength > 0 && (s.length() >= minLength && s.length() <= maxLength) || maxLength <= 0 && s.length() >= minLength).sorted(Comparator.comparingInt(String::length)).distinct().forEach(System.out::println);
+            list.stream().filter(s -> maxLength > 0 ? (s.length() >= minLength && s.length() <= maxLength) : s.length() >= minLength).sorted((s1, s2) -> Integer.compare(s1.length(), s2.length())).distinct().forEach(System.out::println);
 
         } else if (sortingOrder.equals(DESCENDING)) {
-            list.stream().filter(s -> (maxLength > 0 && (s.length() >= minLength && s.length() <= maxLength)) || (maxLength <= 0 && s.length() >= minLength)).sorted((s1, s2) -> Integer.compare(s2.length(), s1.length())).distinct().forEach(System.out::println);
+            list.stream().filter(s -> maxLength > 0 ? (s.length() >= minLength && s.length() <= maxLength) : s.length() >= minLength).sorted((s1, s2) -> Integer.compare(s2.length(), s1.length())).distinct().forEach(System.out::println);
         }
 
     }
