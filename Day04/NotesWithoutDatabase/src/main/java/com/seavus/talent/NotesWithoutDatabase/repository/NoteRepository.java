@@ -41,7 +41,8 @@ public class NoteRepository {
     }
 
     public void deleteNoteById(Long id) {
-        notes.remove(findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
+        notes.remove(findById(id).get());
+
     }
 
 

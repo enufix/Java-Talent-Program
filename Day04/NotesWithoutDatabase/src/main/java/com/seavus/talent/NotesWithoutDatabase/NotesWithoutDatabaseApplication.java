@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class NotesWithoutDatabaseApplication {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		SpringApplication.run(NotesWithoutDatabaseApplication.class, args);
+        SpringApplication.run(NotesWithoutDatabaseApplication.class, args);
 
-	}
+    }
 
 }
