@@ -41,10 +41,10 @@ public class TagController {
         return tagService.findTag(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/api/tags/{tagId}")
-    public void deleteTag(@PathVariable Long tagId) {
+    @DeleteMapping("/api/tags/{id}")
+    public void deleteTag(@PathVariable Long id) {
 
-        tagService.deleteTag(tagId);
+        tagService.deleteTag(id);
 
     }
 
