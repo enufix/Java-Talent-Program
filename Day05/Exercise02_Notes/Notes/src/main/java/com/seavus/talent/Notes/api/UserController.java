@@ -5,10 +5,11 @@ import com.seavus.talent.Notes.model.User;
 import com.seavus.talent.Notes.security.SecurityService;
 import com.seavus.talent.Notes.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@RequestMapping
 @RestController
 public class UserController {
 
