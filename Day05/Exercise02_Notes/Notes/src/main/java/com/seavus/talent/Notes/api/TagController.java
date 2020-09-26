@@ -10,7 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import java.util.Set;
+
 @RequestMapping
 @RestController
 public class TagController {
@@ -27,18 +28,16 @@ public class TagController {
 
     public static class CreateTagRequest {
         public String name;
-        public Long userId;
     }
 
     @PostMapping("/api/tags")
-    public void createTag(@RequestBody TagController.CreateTagRequest request) {
+    public Tag createTag(@RequestBody TagController.CreateTagRequest request) {
 
-        tagService.createTag(request.name);
+        return tagService.createTag(request.name);
     }
 
-
     @GetMapping("/api/tags")
-    public List<Tag> findTags() {
+    public Set<Tag> findTags() {
         User user = securityService.getAuthenticatedUser();
         return tagService.findTags(user);
     }
@@ -50,9 +49,9 @@ public class TagController {
 
     @DeleteMapping("/api/tags/{id}")
     public void deleteTag(@PathVariable Long id) {
-    Tag tag = tagService.findTag(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-    noteService.deleteTagFromNote(tag);
-    tagService.deleteTag(id);
+        Tag tag = tagService.findTag(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        noteService.deleteTagFromNote(tag);
+        tagService.deleteTag(id);
 
     }
 

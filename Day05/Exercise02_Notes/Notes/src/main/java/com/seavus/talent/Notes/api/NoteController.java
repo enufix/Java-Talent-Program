@@ -9,7 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import java.util.Set;
+
 @RequestMapping
 @RestController
 public class NoteController {
@@ -25,14 +26,13 @@ public class NoteController {
     }
 
     @PostMapping("/api/notes")
-    public void createNote(@RequestBody CreateNoteRequest request) {
-        noteService.createNote(request.title, request.content);
+    public Note createNote(@RequestBody CreateNoteRequest request) {
+        return noteService.createNote(request.title, request.content);
     }
 
     public static class CreateNoteRequest {
         public String title;
         public String content;
-        public User user;
     }
 
     @GetMapping("/api/notes/{id}")
@@ -41,25 +41,23 @@ public class NoteController {
     }
 
     @GetMapping("/api/notes")
-    public List<Note> findNotes() {
+    public Set<Note> findNotes() {
         User user = securityService.getAuthenticatedUser();
         return noteService.findNotes(user);
     }
 
     @GetMapping("api/tags/{id}/notes")
-    public List<Note> findNotesByTagId(@PathVariable Long id) {
+    public Set<Note> findNotesByTagId(@PathVariable Long id) {
 
         return noteService.findNotesByTagId(id);
     }
 
-
     @PutMapping("/api/notes/{id}")
-    public void updateNote(@PathVariable Long id, @RequestBody CreateNoteRequest request) {
+    public Note updateNote(@PathVariable Long id, @RequestBody CreateNoteRequest request) {
 
-       noteService.updateNote(request.title, request.content, id);
+        return noteService.updateNote(request.title, request.content, id);
 
-   }
-
+    }
 
     @DeleteMapping("/api/notes/{id}")
     public void deleteNote(@PathVariable Long id) {
@@ -67,6 +65,4 @@ public class NoteController {
         noteService.deleteNote(id);
 
     }
-
-
 }

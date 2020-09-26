@@ -1,7 +1,7 @@
 package com.seavus.talent.Notes.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Note {
@@ -13,9 +13,8 @@ public class Note {
     private String title;
     private String content;
 
-
     @ManyToMany
-    private List<Tag> tags;
+    private Set<Tag> tags;
 
     @ManyToOne
     private User user;
@@ -25,14 +24,14 @@ public class Note {
 
     }
 
-    public Note(String title, String content, User user) {
+    public Note(String title, String content, User user, Set<Tag> tags) {
 
         this.title = title;
         this.content = content;
         this.user = user;
+        this.tags = tags;
 
     }
-
 
     public Long getId() {
         return id;
@@ -54,11 +53,11 @@ public class Note {
         this.content = content;
     }
 
-    public List<Tag> getTags() {
+    public Set<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
 
@@ -70,7 +69,6 @@ public class Note {
         this.user = user;
     }
 
-
     @Override
     public String toString() {
         return "Note{" +
@@ -79,6 +77,4 @@ public class Note {
                 ", content='" + content + '\'' +
                 '}';
     }
-
-
 }

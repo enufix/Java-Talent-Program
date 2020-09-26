@@ -4,12 +4,12 @@ import com.seavus.talent.Notes.model.Note;
 import com.seavus.talent.Notes.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import java.util.Set;
 
 public interface NoteRepository extends JpaRepository<Note, Long> {
 
-    List<Note> findNotesByTagsId(Long id);
+    Set<Note> findNotesByTagsId(Long id);
 
-    List<Note> findByUser(User user);
+    Set<Note> findByUser(User user);
 }
 
