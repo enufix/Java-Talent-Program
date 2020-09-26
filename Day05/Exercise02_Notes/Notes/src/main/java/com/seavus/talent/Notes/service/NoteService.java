@@ -30,6 +30,7 @@ public class NoteService {
     public Note createNote(String title, String content) {
         User user = securityService.getAuthenticatedUser();
         Set<Long> tagIds = new HashSet<>();
+        tagIds.add(user.getId());
         Set<Tag> tags = tagRepository.findAllById(tagIds).stream().filter(tag -> tag.getUser().equals(user)).collect(Collectors.toSet());
         Note note = new Note(title, content, user, tags);
         return noteRepository.save(note);
@@ -53,6 +54,7 @@ public class NoteService {
     public Note updateNote(String title, String content, Long id) {
         User user = securityService.getAuthenticatedUser();
         Set<Long> tagIds = new HashSet<>();
+        tagIds.add(user.getId());
         Set<Tag> tags = tagRepository.findAllById(tagIds).stream().filter(tag -> tag.getUser().equals(user)).collect(Collectors.toSet());
         Note note = noteRepository.findById(id).get();
         note.setTitle(title);
