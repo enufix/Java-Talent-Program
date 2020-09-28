@@ -27,10 +27,9 @@ public class NoteService {
         this.tagRepository = tagRepository;
     }
 
-    public Note createNote(String title, String content) {
+
+    public Note createNote(String title, String content, Set<Long> tagIds) {
         User user = securityService.getAuthenticatedUser();
-        Set<Long> tagIds = new HashSet<>();
-        tagIds.add(user.getId());
         Set<Tag> tags = tagRepository.findAllById(tagIds).stream().filter(tag -> tag.getUser().equals(user)).collect(Collectors.toSet());
         Note note = new Note(title, content, user, tags);
         return noteRepository.save(note);
@@ -43,6 +42,7 @@ public class NoteService {
     }
 
     public Set<Note> findNotes(User user) {
+
         return noteRepository.findByUser(user);
     }
 
@@ -51,10 +51,8 @@ public class NoteService {
         return noteRepository.findNotesByTagsId(id);
     }
 
-    public Note updateNote(String title, String content, Long id) {
+    public Note updateNote(String title, String content, Long id, Set<Long> tagIds) {
         User user = securityService.getAuthenticatedUser();
-        Set<Long> tagIds = new HashSet<>();
-        tagIds.add(user.getId());
         Set<Tag> tags = tagRepository.findAllById(tagIds).stream().filter(tag -> tag.getUser().equals(user)).collect(Collectors.toSet());
         Note note = noteRepository.findById(id).get();
         note.setTitle(title);
@@ -72,4 +70,6 @@ public class NoteService {
         noteRepository.findAll().forEach(note -> note.getTags().remove(tag));
 
     }
+
+
 }

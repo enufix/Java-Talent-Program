@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @RequestMapping
@@ -27,12 +28,13 @@ public class NoteController {
 
     @PostMapping("/api/notes")
     public Note createNote(@RequestBody CreateNoteRequest request) {
-        return noteService.createNote(request.title, request.content);
+        return noteService.createNote(request.title, request.content, request.tagIds);
     }
 
     public static class CreateNoteRequest {
         public String title;
         public String content;
+        public Set<Long> tagIds = new HashSet<>();
     }
 
     @GetMapping("/api/notes/{id}")
@@ -55,7 +57,7 @@ public class NoteController {
     @PutMapping("/api/notes/{id}")
     public Note updateNote(@PathVariable Long id, @RequestBody CreateNoteRequest request) {
 
-        return noteService.updateNote(request.title, request.content, id);
+        return noteService.updateNote(request.title, request.content, id, request.tagIds);
 
     }
 
