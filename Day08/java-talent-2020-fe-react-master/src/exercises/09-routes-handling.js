@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter, Link, Switch, Route} from "react-router-dom";
 
 // Pretty much every application is going to need to do something with navigation and routes handling.
 // Since React doesn't include routing mechanism we will use additional library named 'react-router'. 
@@ -13,7 +14,19 @@ import React from 'react';
 //   Make sure that you use the current path '/exercise/routes-handling' when defining your custom Routes.
 
 function Routes() {
-    return 'Incomplete';
+    return (
+        <BrowserRouter>
+
+            <Link to="/edit-note">Edit Note</Link><br/>
+            <Link to="/create-note">Create Note</Link><br/><br/>
+
+            <Switch>
+                <Route path="/edit-note"><EditNote/></Route>
+                <Route path="/create-note"><CreateNote/></Route>
+            </Switch>
+
+        </BrowserRouter>
+    );
 }
 
 function EditNote() {
@@ -25,4 +38,4 @@ function CreateNote() {
 }
 
 
-export const Example = () => <Routes />;
+export const Example = () => <Routes/>;
