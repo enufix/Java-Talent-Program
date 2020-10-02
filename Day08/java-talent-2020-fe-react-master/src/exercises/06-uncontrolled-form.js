@@ -28,13 +28,14 @@ class CreateNoteForm extends Component {
 
     }
     handleSubmit = (event) => {
-        alert(this.title.target.value + " " + this.content.target.value);
+        alert(this.title.target.value);
+        alert(this.content.target.value);
     }
     render() {
         return <div>
         <form onSubmit={this.handleSubmit}>
-            <label>Title: </label><input name={"title"} ref={this.title}/>
-            <label>Content: </label><input name={"content"} ref={this.content}/>
+            <label>Title: </label><input name="title" ref={this.title}/>
+            <label>Content: </label><input name="content" ref={this.content}/>
             <button>Submit</button>
 
         </form>
