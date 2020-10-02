@@ -2,6 +2,11 @@ test('has a constructor for initialization', () => {
     // Create an Animal class
     // Add a constructor that takes one param, the name.
     // Set this.name to the name passed in
+    class Animal {
+        constructor(name) {
+            this.name = name;
+        }
+    }
 
     const animal = new Animal();
     const dog = new Animal('Dog');
@@ -15,6 +20,11 @@ test('has a constructor for initialization', () => {
 test('constructor can have default param values', () => {
     // Create an Animal class with a constructor
     // Make your class default (using default params) the name to 'Honey Badger'
+    class Animal {
+        constructor(name = 'Honey Badger') {
+            this.name = name;
+        }
+    }
 
     const animal = new Animal();
     const dog = new Animal('Dog');
@@ -27,8 +37,18 @@ test('constructor can have default param values', () => {
 
 test('can have instance methods', () => {
     // Create an Animal class, pass in the name to the constructor, and add a sayName function to the class definition
+    class Animal {
+        constructor(name = 'Honey Badger') {
+            this.name = name;
+        }
+
+        sayName() {
+            return "My name is: " + this.name;
+        }
+    }
 
     const animal = new Animal();
+    animal.sayName();
 
     expect(animal.sayName)
         .toBeDefined();
@@ -41,6 +61,15 @@ test('can have instance methods', () => {
 test('can have static methods', () => {
     // Create an Animal class, pass in the name to the constructor,
     // and add a create method that takes a name and returns an instance
+    class Animal {
+        constructor(name) {
+            this.name = name;
+        }
+
+        static create(name) {
+            return new Animal(name);
+        }
+    }
 
     const animal = new Animal();
 
@@ -54,6 +83,20 @@ test('can extend another class', () => {
     // Create an Animal class
     // Create a Dog class that extends Animal
     // Add sayName to Animal
+    class Animal {
+        constructor(name) {
+            this.name = name;
+        }
+        sayName(){
+            return "My name is: " + this.name;
+        }
+    }
+
+    class Dog extends Animal {
+        constructor(name) {
+            super(name);
+        }
+    }
 
     const dog = new Dog('Fido');
 
