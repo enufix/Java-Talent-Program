@@ -21,8 +21,7 @@ import React, { Component } from 'react';
 // For extracting the values of the input fields, use React Refs.
 class CreateNoteForm extends Component {
     constructor(props) {
-        super();
-        this.handleSubmit = this.handleSubmit.bind(this);
+        super(props);
         this.title = React.createRef;
         this.content = React.createRef;
 
