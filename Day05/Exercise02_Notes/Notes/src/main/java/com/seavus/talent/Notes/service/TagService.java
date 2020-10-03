@@ -36,8 +36,15 @@ public class TagService {
         return tagRepository.findById(id);
     }
 
+    public Tag updateTag(Long id, String name) {
+        Tag tag = tagRepository.findById(id).get();
+        tag.setName(name);
+        return tagRepository.save(tag);
+    }
+
     public void deleteTag(Long id) {
         tagRepository.deleteById(id);
     }
+
 
 }

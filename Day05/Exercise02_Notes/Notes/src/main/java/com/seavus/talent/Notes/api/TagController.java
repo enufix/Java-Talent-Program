@@ -47,6 +47,13 @@ public class TagController {
         return tagService.findTag(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
+    @PutMapping("/api/tags/{id}")
+    public Tag updateTag(@PathVariable Long id, @RequestBody CreateTagRequest request) {
+
+        return tagService.updateTag(id, request.name);
+
+    }
+
     @DeleteMapping("/api/tags/{id}")
     public void deleteTag(@PathVariable Long id) {
         Tag tag = tagService.findTag(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
