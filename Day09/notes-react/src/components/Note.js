@@ -116,7 +116,7 @@ class Note extends Component {
                   this.state.tags.map(tag => <option key={tag.id}>{tag.name}</option>)
                 }
               </select>
-              <input className="note-button" type="submit" value="Submit" onClick={this.setTagsToAdd}/>
+              <input className="note-button" type="submit" value="Submit"/>
 
             </div>
           </div>
